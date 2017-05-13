@@ -58,7 +58,7 @@ class MainSelectorComponent(ModeSelectorComponent):
             self._session = SpecialSessionComponent(matrix.width(), matrix.height() - 1, clip_stop_buttons,
                                                     self._control_surface, self)
         else:  # no stop buttons
-            self._session = SpecialSessionComponent(matrix.width(), matrix.height(), None, self._control_surface, self)
+            self._session = SpecialSessionComponent(2, 4, None, self._control_surface, self)
 
             # initialize _session variables
         self._session.set_osd(self._osd)
@@ -347,7 +347,9 @@ class MainSelectorComponent(ModeSelectorComponent):
                 button.set_on_off_values("Mode.Session.On", "Mode.Session.Off")
             else:
                 button.set_on_off_values("DefaultButton.Disabled", "DefaultButton.Disabled")
-
+        total_tracks = 2
+        matrix_track_offset = 3
+        
         # matrix
         self._activate_matrix(True)
         for scene_index in range(self._session._num_scenes):  # iterate over scenes
@@ -360,9 +362,9 @@ class MainSelectorComponent(ModeSelectorComponent):
             else:
                 scene.set_launch_button(None)
 
-            for track_index in range(self._session._num_tracks):  # iterate over tracks of a scene -> clip slots
+            for track_index in range(total_tracks):  # iterate over tracks of a scene -> clip slots
                 if as_active:  # set clip slot launch button
-                    button = self._matrix.get_button(track_index, scene_index)
+                    button = self._matrix.get_button(track_index + matrix_track_offset, scene_index)
                     button.set_on_off_values("DefaultButton.Disabled", "DefaultButton.Disabled")
                     button.set_enabled(as_active)
                     scene.clip_slot(track_index).set_launch_button(button)
