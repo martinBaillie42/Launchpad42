@@ -1,7 +1,4 @@
 #!/bin/sh
-if [ -f '*.pyc' ]; then
-   rm *.pyc
-fi
 
 if pgrep Live; then
     osascript -e 'tell application "System Events"
@@ -19,5 +16,9 @@ fi
 while pgrep Live; do
   sleep 1
 done
+
+if [ -f '*.pyc' ]; then
+   rm *.pyc
+fi
 
 open -a 'Ableton Live 9 Lite.app'
