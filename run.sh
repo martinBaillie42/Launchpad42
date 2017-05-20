@@ -14,8 +14,6 @@ while pgrep Live; do
   sleep 1
 done
 
-if [ -f '*.pyc' ]; then
-   rm *.pyc
-fi
+find . -name \*.pyc -delete
 
 open -a 'Ableton Live 9 Lite.app'
